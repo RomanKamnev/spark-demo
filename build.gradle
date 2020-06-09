@@ -1,0 +1,60 @@
+plugins {
+    id 'org.springframework.boot' version '2.2.6.RELEASE'
+    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+    id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+//	implementation ("org.springframework.boot:spring-boot-starter-data-jpa"){
+//        exclude module: "logback-classic"
+//    }
+//	implementation("org.springframework.boot:spring-boot-starter-data-jdbc")
+	implementation ("org.springframework.boot:spring-boot-starter-data-rest"){
+        exclude module: "logback-classic"
+    }
+    compileOnly 'org.projectlombok:lombok'
+    compile group: 'org.apache.spark', name: 'spark-core_2.12', version: '2.4.5'
+    compile group: 'org.apache.spark', name: 'spark-sql_2.12', version: '2.4.5'
+    compile group: 'org.springframework.kafka', name: 'spring-kafka', version: '2.4.6.RELEASE'
+
+//		compile (group: 'org.apache.spark', name: 'spark-sql_2.12', version: '2.4.5'){
+//		exclude group: 'org.codehaus.janino', module: 'janino'
+//	}
+
+    compile group: 'org.projectlombok', name: 'lombok', version: '1.18.12'
+    compile group: 'org.codehaus.janino', name: 'janino', version: '3.0.8'
+    compile group: 'org.codehaus.janino', name: 'commons-compiler', version: '3.0.8'
+//		force = true
+//		exclude group: 'org.codehaus.janino', module: 'janino'
+//	}
+    //	compile group: 'org.codehaus.janino', name: 'commons-compiler-jdk', version: '3.1.2'
+
+    runtimeOnly 'org.postgresql:postgresql'
+    annotationProcessor 'org.projectlombok:lombok'
+
+//	testImplementation('org.springframework.boot:spring-boot-starter-test') {
+//		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+//	}
+
+
+}
+
+test {
+    useJUnitPlatform()
+}
